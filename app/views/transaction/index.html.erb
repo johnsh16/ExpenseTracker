@@ -1,0 +1,11 @@
+<h1>Transactions</h1>
+
+<ul>
+    <% @transactions.each do |transaction| %>
+        <li>
+            date: <%= transaction.date %>, id: <%= transaction.id %>, amount: <%= transaction.amount %>, account: <%= transaction.account %>. 
+        </li>
+    <% end %>
+</ul>
+
+<a href="/">Go Home</a>
