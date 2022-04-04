@@ -12,12 +12,14 @@ class UserController < ApplicationController
     end
 
     def create 
-      @user = User.new(first_name:"...", last_name:"...", email:"...", password:"...")
+      @user = User.new(email: params[:email], first_name: params[:first_name], last_name: params[:last_name], password: params[:password])
 
       if @user.save
-          redirect_to @user
+        session[:user_id] = @user.id
+        redirect_to "/"
       else 
-          render :new, status: :unprocessable_entity
+        render :new, status: :unprocessable_entity
+      end
     end
 
     def destroy
@@ -25,10 +27,9 @@ class UserController < ApplicationController
       @user.destroy
     end
 
-    def addAccount
-      @user = User.find(params[:id])
-      @account = Account.find(params[:id])
-      @user.accounts += @account
+    private
+
+    def user_params
+      params.require(:user).permit(:email, :password, :first_name, :last_name)
     end
-  end
 end

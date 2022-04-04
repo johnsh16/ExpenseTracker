@@ -27,4 +27,10 @@ class AccountController < ApplicationController
         @account.destroy
     end
 
+    private 
+    
+    def account_params
+        params.require(:account).permit(:id, :name)
+    end
+
 end
