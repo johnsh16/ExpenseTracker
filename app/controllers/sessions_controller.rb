@@ -7,12 +7,18 @@ class SessionsController < ApplicationController
         if !!@user && @user.authenticate(params[:password])
             session[:user_id] = @user.id
             puts "logged in"
-            redirect_to "/user/#{@user.id}"
+            redirect_to "/"
         else 
             flash.alert = "User not found"
             puts "not found"
             message = "Error in login..."
             redirect_to "/user/login", notice: message
         end
+    end
+
+    def destroy 
+        @session = session[:user_id]
+        @session = nil
+        redirect_to "/"
     end
 end

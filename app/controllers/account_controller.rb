@@ -1,6 +1,6 @@
 class AccountController < ApplicationController
     def index 
-        @accounts = Account.all
+        @accounts = User.find_by(session[:user_id]).accounts
     end
 
     def show
@@ -13,7 +13,13 @@ class AccountController < ApplicationController
     end
 
     def create
-        @account = Account.new(name: "...")
+        @user = User.find_by(session[:user_id])
+        @account
+        if !!@user
+            @account = @user.account.new(account_params)
+        else 
+            puts "Not logged in"
+        end
 
         if @account.save
             redirect_to @account
@@ -28,7 +34,7 @@ class AccountController < ApplicationController
     end
 
     private 
-    
+
     def account_params
         params.require(:account).permit(:id, :name)
     end

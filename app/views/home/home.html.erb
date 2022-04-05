@@ -1,2 +1,10 @@
 <h1>Expense Tracker Home</h1>
-<a href="/transaction/index">View Transactions</a>
+<% if logged_in?  %>
+    <% current_user %>
+    <h3>Logged in as </h3>
+    <a href="/user/logout">Logout</a>
+    <a href="/transaction/index">View Transactions</a>
+<% else %>
+    <a href="/user/login/">Login</a>
+    <a href="/user/signup">Create an Account</a>
+<% end %>

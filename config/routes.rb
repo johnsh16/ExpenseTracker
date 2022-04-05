@@ -5,9 +5,11 @@ Rails.application.routes.draw do
   get 'user/login'
   get 'home/home'
   get 'transaction/index'
+  get 'account/index'
 
   post '/user/login', to: 'sessions#create'
   post '/user/signup', to: 'user#create'
+  get '/user/logout', to: 'sessions#destroy'
   
   resources :user
   resources :transaction

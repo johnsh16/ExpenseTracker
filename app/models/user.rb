@@ -7,7 +7,8 @@ class User < ApplicationRecord
 
     has_many :accounts
 
-    def signup 
+    def email
+        self.email 
     end
 
 
