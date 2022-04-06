@@ -1,11 +1,16 @@
 <h1>Transactions</h1>
 
-<ul>
-    <% @transactions.each do |transaction| %>
-        <li>
-            date: <%= transaction.date %>, id: <%= transaction.id %>, amount: <%= transaction.amount %>, account: <%= transaction.account %>. 
-        </li>
-    <% end %>
-</ul>
+<% if @transactions != nil %>
+    <ul>
+        <% @transactions.each do |transaction| %>
+            <li>
+                date: <%= transaction.date %>, id: <%= transaction.id %>, amount: <%= transaction.amount %>, account: <%= transaction.account %>. 
+            </li>
+        <% end %>
+    </ul>
+<% else %> 
+    <h3>You have no transactions</h3>
+<% end %>
 
+<a href="/transaction/
 <a href="/">Go Home</a>

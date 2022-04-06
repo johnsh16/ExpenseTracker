@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   get 'home/home'
   get 'transaction/index'
   get 'account/index'
+  get 'account/new'
 
   post '/user/login', to: 'sessions#create'
   post '/user/signup', to: 'user#create'

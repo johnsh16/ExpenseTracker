@@ -1,6 +1,7 @@
 class UserController < ApplicationController
     def index
       @users = User.all
+      @email = User.find_by_id(session[:user_id]).email
     end
 
     def show 

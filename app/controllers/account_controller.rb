@@ -1,11 +1,11 @@
 class AccountController < ApplicationController
     def index 
-        @accounts = User.find_by(session[:user_id]).accounts
+        #@user = User.find_by_id(session[:user_id])
+        @accounts = nil
     end
 
     def show
-        #Dunno if id is the best selector for this field...
-        @account = Account.find(params[:id])
+        @accounts = User.find_by_id(session[:user_id]).accounts
     end 
 
     def new 
@@ -13,7 +13,7 @@ class AccountController < ApplicationController
     end
 
     def create
-        @user = User.find_by(session[:user_id])
+        @user = User.find_by_id(session[:user_id])
         @account
         if !!@user
             @account = @user.account.new(account_params)

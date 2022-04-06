@@ -1,9 +1,10 @@
 class Account < ApplicationRecord
-    validates :type, inclusion: { in: ACCOUNT_TYPES}
+    #validates :type, inclusion: { in: ACCOUNT_TYPES}
 
     belongs_to :user
+    has_many :transactions
 
-    ACCOUNT_TYPES = ['savings', 'checking', 'other']
+    #ACCOUNT_TYPES = ['savings', 'checking', 'other']
 
     
 end

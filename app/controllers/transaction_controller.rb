@@ -1,18 +1,19 @@
 class TransactionController < ApplicationController
     def index
-        @transactions = Transaction.all
+        @accounts = User.find_by_id(session[:user_id]).accounts
+        
     end
 
     def show 
-        @transaction = Transaction.find(params[:id])
+        @transactions = User.find_by_id(session[:user_id])
     end
 
     def new
-        @transaction = Transaction.new
+        @transaction = Account.find_by_id(transaction_params[:account]).new(transaction_params)
     end
 
     def create 
-        @transaction = Transaction.new(amount: "...")
+        @transaction = Account.find_by_id(transaction_params[:account]).new(transaction_params)
 
         if @transaction.save
             redirect_to @transaction
@@ -24,5 +25,11 @@ class TransactionController < ApplicationController
     def destroy
         @transaction = Transaction.find(params[:id])
         @transaction.destroy
+    end
+
+    private 
+
+    def transaction_params
+        params.require(:transaction).permit(:amount, :account, :type)
     end
 end

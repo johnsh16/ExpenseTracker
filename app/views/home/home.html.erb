@@ -1,7 +1,6 @@
 <h1>Expense Tracker Home</h1>
-<% if logged_in?  %>
-    <% current_user %>
-    <h3>Logged in as </h3>
+<% if logged_in? && current_user  %>
+    <h3>Logged in as <%= @current_email %></h3>
     <a href="/user/logout">Logout</a>
     <a href="/transaction/index">View Transactions</a>
 <% else %>

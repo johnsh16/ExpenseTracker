@@ -6,10 +6,7 @@ class User < ApplicationRecord
     
 
     has_many :accounts
-
-    def email
-        self.email 
-    end
+    has_many :transactions
 
 
 

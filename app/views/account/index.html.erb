@@ -1,4 +1,11 @@
 <h1>Accounts</h1>
-<%= if logged_in then do%>
-
+<% if logged_in? %> 
+    <% if @accounts != nil %>
+        <% @accounts.each do |account| %>
+            <h4><%= account.id %> : <%= account.name %></h4>
+        <%end%>
+    <%else%>
+        <h3>You have no active accounts</h3>
+    <% end %>
+    <a href="/account/create">Add an account</a>
 <% end %>
