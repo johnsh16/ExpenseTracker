@@ -11,8 +11,12 @@ Rails.application.routes.draw do
   post '/user/login', to: 'sessions#create'
   post '/user/signup', to: 'user#create'
   get '/user/logout', to: 'sessions#destroy'
+
+  get '/transaction/new', to: 'transactions#create'
+  get 'transaction/create'
+  post 'transaction/new', to: 'transactions#create'
   
   resources :user
-  resources :transaction
+  resources :transactions
   resources :account
 end

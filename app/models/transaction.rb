@@ -1,5 +1,5 @@
 class Transaction < ApplicationRecord
-    validates :type, inclusion: {in: TRANSACTION_TYPES}
+    #validates :type, inclusion: {in: TRANSACTION_TYPES}
     #validates :class, inclusion: {in: CLASSIFICATIONS}
 
     belongs_to :account
