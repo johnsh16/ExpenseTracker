@@ -1,0 +1,27 @@
+<h1>Account: <%= @account.name %></h1>
+<h4><a href= <%= "/accounts/edit/#{@account.id}" %>>Edit Details</a></h4>
+<% if @transactions.length != 0 %>
+    <table>
+        <tr>
+            <th>Date</th>
+            <th>Description</th>
+            <th>Amount</th>
+            <th>+/-</th>
+        </tr>
+        <% @transactions.each do |transaction| %>
+            <tr>
+                <td><%= transaction.date %></td>
+                <td><%= transaction.description %></td>
+                <td>$<%= transaction.amount %></td>
+                <td><%= formatTransType(transaction) %></td>
+                <td><a href=<%="/transactions/edit/#{transaction.id}"%> >Edit</td>
+                <td>Remove</td> 
+            </tr>
+        <% end %>
+    </table>
+<% else %> 
+    <h3>Account has no transactions</h3>
+<% end %>
+<h2>Balance: $<%= balance %></h2>
+<a href="/transactions/new/">Add a new transaction</a>
+<a href="/accounts/index">Back to Accounts</a>

@@ -1,0 +1,18 @@
+<h1>Update Account</h1>
+<h3><%= @account.name %></h3>
+
+<%= form_with model: @account do |form| %>
+    <div>
+        <%= form.label :name, "Name" %>
+        <%= form.text_field :name, :placeholder => @account.name %>
+    </div>
+
+    <div>
+        <%= form.label :type, "Account Type" %>
+        <%= form.select :account_type, ["Checking", "Savings", "Other"], selected: @account.account_type || nil %>
+    </div>
+
+    <div>
+        <%= form.submit :submit %>
+    </div>
+<% end %> 

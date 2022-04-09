@@ -10,24 +10,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_04_06_190252) do
+ActiveRecord::Schema[7.0].define(version: 2022_04_09_185013) do
   create_table "accounts", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "user"
     t.integer "transactions"
-    t.string "type"
+    t.string "account_type"
+    t.integer "user_id"
   end
 
-  create_table "transactions", id: false, force: :cascade do |t|
-    t.string "date"
+  create_table "transactions", force: :cascade do |t|
     t.integer "amount"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "visible"
     t.string "trans_type"
     t.string "description"
+    t.integer "user_id"
+    t.integer "account_id"
+    t.date "date"
   end
 
   create_table "users", force: :cascade do |t|

@@ -2,6 +2,8 @@ class Transaction < ApplicationRecord
     #validates :type, inclusion: {in: TRANSACTION_TYPES}
     #validates :class, inclusion: {in: CLASSIFICATIONS}
 
+    self.primary_key = "id"
+
     belongs_to :account
     belongs_to :user
 

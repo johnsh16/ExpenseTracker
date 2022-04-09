@@ -1,10 +1,11 @@
 <h1>Transactions</h1>
 
-<% if @transactions != nil %>
+<% if @transactions %>
     <ul>
+        <% puts @transactions %>
         <% @transactions.each do |transaction| %>
             <li>
-                date: <%= transaction.date %>, id: <%= transaction.id %>, amount: <%= transaction.amount %>, account: <%= transaction.account %>. 
+                date: <%= transaction.date %>, id: <%= transaction.id %>, amount: <%= transaction.amount %>, account: <a href="/accounts/#{transaction.account.id}/"><%= transaction.account.name %></a>. 
             </li>
         <% end %>
     </ul>

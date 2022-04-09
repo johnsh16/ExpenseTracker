@@ -1,0 +1,24 @@
+<h1>Accounts</h1>
+<% if logged_in? %> 
+    <% if @accounts != nil %>
+        <table>
+            <thead>
+                <th>Name</th>
+                <th>Balance</th>
+                <th>Account Type</th>
+            </thead>
+        <% @accounts.each do |account| %>
+            <tr>
+                <td><%= account.name %></td>
+                <td>$<%= balanceFromInput(account.id) %></td>
+                <td><%= account.account_type || "none" %></td>
+                <td><a href= <%= account.id %> %s "/accounts/%s" >View</a></td>
+                <td><a href= <%= "/accounts/edit/#{account.id}" %> > Edit</td>
+                <td>Remove</td>
+            </tr>
+        <%end%>
+        <a href="/accounts/create">Add an account</a>
+    <%else%>
+        <h3>You have no active accounts</h3>
+    <% end %>
+<% end %>

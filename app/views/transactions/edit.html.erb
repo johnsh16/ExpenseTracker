@@ -1,0 +1,28 @@
+<h1>Edit Transaction</h1>
+<h3>Transaction ID: <%= @transaction.id %></h3>
+
+<%= form_with model: @transaction do |form| %>
+    <div>
+        <%= form.label :amount, "Amount" %>
+        <%= form.number_field :amount, in: 0.00..100000.00, step: 0.01, :placeholder => @transaction.amount.to_i || nil %>
+    </div>
+
+    <div>
+        <%= form.label :trans_type, "Transaction Type" %>
+        <%= form.select :trans_type, ["credit", "debit"], selected: @transaction.trans_type || nil %>
+    </div>
+
+    <div>
+        <%= form.label :description, "Description" %>
+        <%= form.text_field :description, :placeholder => @transaction.description || nil %>
+    </div>
+
+    <div>
+        <%= form.label :account, "Account" %>
+        <%= form.select :account, account_names, selected: @account.name %>
+    </div>
+
+    <div>
+        <%= form.submit :submit %>
+    </div>
+<% end %> 

@@ -1,0 +1,30 @@
+<%= stylesheet_link_tag 'transactions' %>
+
+<h1>All Transactions</h1>
+<% if @transactions != nil %>
+    <table>
+        <thead>
+            <th>Date</th>
+            <th>Amount</th>
+            <th>Description</th>
+            <th>Account</th>
+            <th>Edit</th>
+            <th>Destroy</th>
+        </thead>
+        <% @transactions.each do |transaction| %>
+            <tr>
+                <td><%= transaction.date %></td>
+                <td><%= transaction.amount %></td>
+                <td><%= transaction.description %></td>
+                <td><a href=<%="/accounts/#{transaction.account.id}/"%>><%= transaction.account.name %></a></td>
+                <td>Edit</td>
+                <td>Destroy</td>
+            </tr>       
+        <% end %>
+    </table>
+<% else %> 
+    <h3>You have no transactions</h3>
+<% end %>
+
+<a href="/transactions/new">Add a transaction</a>
+<a href="/">Go Home</a>
