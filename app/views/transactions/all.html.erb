@@ -1,0 +1,30 @@
+<h1 class="page-title">All Transactions</h1>
+<div class="container">
+<table class="table table-light table-striped">
+    <thead>
+        <th>Date</th>
+        <th>Amount</th>
+        <th>Description</th>
+        <th>Account</th>
+        <th>Re-activate</th>
+        <th>Edit</th>
+        <th>Remove</th>
+    </thead>
+    <% @transactions.each do |transaction| %>
+        <tr>
+            <td><%= transaction.date %></td>
+            <td><%= transaction.amount %></td>
+            <td><%= transaction.description %></td>
+            <td><a href=<%="/accounts/#{transaction.account.id}/"%>><%= transaction.account.name %></a></td>
+            <% if transaction.visible == false || transaction.visible == nil %>
+                <td><a href=<%= "/transactions/activate/#{transaction.id}" %>><div class="btn btn-primary">Activate</div></a></td>
+            <% else %>
+                <td>Active</td>
+            <% end %>
+            <td><a href=<%= "/transactions/edit/#{transaction.id}/" %>><div class="btn btn-primary">Edit</div></a></td>
+            <td><a href=<%= "/transactions/remove/#{transaction.id}/" %>><div class="btn btn-primary">Remove</div></a></td>
+        </tr>       
+    <% end %>
+</table>
+</div>
+<a href="/transactions/index"><div class="btn btn-primary">Back to All Transactions</div></a>

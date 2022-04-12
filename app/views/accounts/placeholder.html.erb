@@ -1,22 +1,18 @@
 <h1 class="page-title">Update Account</h1>
-<h3 class="page-subtitle"><%= @account.name %></h3>
+<h3><%= @account.name %></h3>
 
-<div class="container">
-<div class="card">
 <%= form_with model: @account do |form| %>
-    <div class="mb-3 form-contents">
+    <div class="mb-3">
         <%= form.label :name, "Name" %>
         <%= form.text_field :name, :placeholder => @account.name %>
     </div>
 
-    <div class="mb-3 form-contents">
+    <div class="mb-3">
         <%= form.label :type, "Account Type" %>
         <%= form.select :account_type, ["Checking", "Savings", "Other"], selected: @account.account_type || nil %>
     </div>
 
-    <div class="mb-3 form-contents">
+    <div class="mb-3">
         <%= form.submit :submit %>
     </div>
 <% end %> 
-</div>
-</div>

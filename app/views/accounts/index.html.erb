@@ -1,24 +1,32 @@
-<h1>Accounts</h1>
+<h1 class="page-title">Accounts</h1>
 <% if logged_in? %> 
     <% if @accounts != nil %>
-        <table>
+    <div class="container">
+        <table class="table table-light table-striped">
             <thead>
                 <th>Name</th>
                 <th>Balance</th>
                 <th>Account Type</th>
+                <th colspan="3">Actions...</th>
             </thead>
         <% @accounts.each do |account| %>
+            <% if account.visible == true || account.visible == nil %>
             <tr>
                 <td><%= account.name %></td>
                 <td>$<%= balanceFromInput(account.id) %></td>
                 <td><%= account.account_type || "none" %></td>
-                <td><a href= <%= account.id %> %s "/accounts/%s" >View</a></td>
-                <td><a href= <%= "/accounts/edit/#{account.id}" %> > Edit</td>
-                <td>Remove</td>
+                <td><a href= <%= account.id %> %s "/accounts/%s" ><div class="btn btn-primary">View</div></a></td>
+                <td><a href= <%= "/accounts/edit/#{account.id}" %> ><div class="btn btn-primary"> Edit</div></a></td>
+                <td><a href= <%= "/accounts/remove/#{account.id}" %><div class="btn btn-primary">Remove</div></a></td>
             </tr>
+            <% end %>
         <%end%>
-        <a href="/accounts/create">Add an account</a>
+        </table>
+        </div>
+        <a href="/accounts/create"><div class="btn btn-primary">Add an Account</div></a>
+        <a href="/accounts/hidden"><div class="btn btn-primary">View Deleted Accounts</div></a>
     <%else%>
         <h3>You have no active accounts</h3>
+        <a href="/accounts/hidden/"><div class="btn btn-primary">View Deleted Accounts</div></a>
     <% end %>
 <% end %>

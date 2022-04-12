@@ -55,9 +55,21 @@ class TransactionsController < ApplicationController
         end
     end
 
-    def destroy
+    def remove
         @transaction = Transaction.find(params[:id])
-        @transaction.destroy
+        @transaction.update(visible: false)
+        redirect_back_or_to "/transactions/index"
+    end
+
+    def all 
+        @user = User.find_by_id(session[:user_id])
+        @transactions = @user.transactions
+    end 
+
+    def activate
+        @transaction = Transaction.find(params[:id])
+        @transaction.update(visible: true)
+        redirect_to '/transactions/all'
     end
 
     private 

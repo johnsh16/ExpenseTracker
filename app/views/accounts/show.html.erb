@@ -1,27 +1,34 @@
-<h1>Account: <%= @account.name %></h1>
-<h4><a href= <%= "/accounts/edit/#{@account.id}" %>>Edit Details</a></h4>
+<h1 class="page-title">Account: <%= @account.name %></h1>
+<h4 class="page-subtitle"><a href= <%= "/accounts/edit/#{@account.id}" %>>Edit Details</a></h4>
 <% if @transactions.length != 0 %>
-    <table>
+    <div class="container">
+    <table class="table table-light">
         <tr>
             <th>Date</th>
             <th>Description</th>
+            <th>Group</th>
             <th>Amount</th>
             <th>+/-</th>
+            <th colspan="2">Actions...</th>
         </tr>
         <% @transactions.each do |transaction| %>
+            <% if transaction.visible == true || transaction.visible == nil %>
             <tr>
                 <td><%= transaction.date %></td>
                 <td><%= transaction.description %></td>
+                <td>Group</td>
                 <td>$<%= transaction.amount %></td>
                 <td><%= formatTransType(transaction) %></td>
-                <td><a href=<%="/transactions/edit/#{transaction.id}"%> >Edit</td>
-                <td>Remove</td> 
+                <td><a href=<%="/transactions/edit/#{transaction.id}"%>><div class="btn btn-primary">Edit</div></a></td>
+                <td><a href=<%="/transactions/remove/#{transaction.id}"%>><div class="btn btn-primary">Remove</div></a></td> 
             </tr>
+            <% end %>
         <% end %>
     </table>
+    </div>
 <% else %> 
     <h3>Account has no transactions</h3>
 <% end %>
 <h2>Balance: $<%= balance %></h2>
-<a href="/transactions/new/">Add a new transaction</a>
-<a href="/accounts/index">Back to Accounts</a>
+<a href="/transactions/new/"><div class="btn btn-primary">Add a new transaction</div></a>
+<a href="/accounts/index"><div class="btn btn-primary">Back to Accounts</div></a>

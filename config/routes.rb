@@ -11,7 +11,11 @@ Rails.application.routes.draw do
   get '/accounts/create'
   get '/accounts/edit'
   get '/accounts/edit/:id', to: 'accounts#edit'
+  get '/accounts/update/:id', to: 'accounts#update'
   post '/accounts/edit/:id', to: 'accounts#update'
+  get '/accounts/hidden', to: 'accounts#hidden'
+  get '/accounts/remove/:id', to: 'accounts#remove'
+  get '/accounts/activate/:id', to: 'accounts#activate'
 
   post '/user/login', to: 'sessions#create'
   post '/user/signup', to: 'user#create'
@@ -24,6 +28,10 @@ Rails.application.routes.draw do
   get '/transactions/edit'
   get '/transactions/edit/:id', to: 'transactions#edit'
   post '/transactions/edit/:id', to: 'transactions#update'
+  get '/transactions/remove/:id', to: 'transactions#remove'
+  get '/transactions/all', to: 'transactions#all'
+  post '/transactions/all', to: 'transactions#activate'
+  get '/transactions/activate/:id', to: 'transactions#activate'
   
   resources :users
   resources :transactions

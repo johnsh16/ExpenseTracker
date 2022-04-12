@@ -3,10 +3,12 @@ module AccountHelper
         @transactions = Account.find_by_id(params[:id]).transactions
         balance = 0
         for transaction in @transactions 
-            if transaction.trans_type == "debit"
-                balance -= transaction.amount
-            elsif transaction.trans_type == "credit"
-                balance += transaction.amount
+            if transaction.visible
+                if transaction.trans_type == "debit"
+                    balance -= transaction.amount
+                elsif transaction.trans_type == "credit"
+                    balance += transaction.amount
+                end
             end
         end
         balance
@@ -33,5 +35,16 @@ module AccountHelper
             return_symbol = "+"
         end
         return_symbol
+    end
+
+    def hiddenAccounts? 
+        @user = User.find_by_id(session[:user_id])
+        @accounts = @user.accounts
+        for account in @accounts
+            if account.visible == false
+                return true
+            end
+        end
+        return false
     end
 end

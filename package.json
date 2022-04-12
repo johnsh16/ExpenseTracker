@@ -1,0 +1,41 @@
+{
+  "name": "expensetracker",
+  "version": "1.0.0",
+  "description": "Project created as part of a microinternship with Open Avenues Foundation.",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/johnsh16/ExpenseTracker.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/johnsh16/ExpenseTracker/issues"
+  },
+  "homepage": "https://github.com/johnsh16/ExpenseTracker#readme",
+  "dependencies": {
+    "@hotwired/stimulus": "^3.0.1",
+    "@hotwired/turbo": "^7.1.0",
+    "@hotwired/turbo-rails": "^7.1.1",
+    "@popperjs/core": "^2.11.5",
+    "@rails/webpacker": "^5.4.3",
+    "bootstrap": "^5.1.3",
+    "jquery": "^3.6.0",
+    "popper.js": "^1.16.1",
+    "react": "^18.0.0",
+    "react-router-dom": "^6.3.0",
+    "webpack": "^4.46.0",
+    "webpack-cli": "^3.3.12",
+    "yarn": "^1.22.18"
+  },
+  "devDependencies": {
+    "webpack-dev-server": "^3"
+  }
+}

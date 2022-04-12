@@ -44,6 +44,8 @@ gem "bootsnap", require: false
 
 gem "bcrypt-ruby"
 
+gem "webpacker", "~> 5.0"
+
 # Use Sass to process CSS
 # gem "sassc-rails"
 

@@ -1,16 +1,22 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>ExpenseTracker</title>
+    <title><%= content_for?(:title) ? yield(:title) : "ExpenseTracker" %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
+    <%= javascript_pack_tag 'application' %>
   </head>
 
   <body>
-    <%= yield %>
+    <header>
+      <%= render 'layouts/navigation' %>
+    </header>
+    <main role="main">
+      <%= content_for?(:content) ? yield(:content) : yield %>
+    </main>
   </body>
 </html>

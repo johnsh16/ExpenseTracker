@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_04_09_185013) do
+ActiveRecord::Schema[7.0].define(version: 2022_04_12_173411) do
   create_table "accounts", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -19,6 +19,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_09_185013) do
     t.integer "transactions"
     t.string "account_type"
     t.integer "user_id"
+    t.boolean "visible"
   end
 
   create_table "transactions", force: :cascade do |t|

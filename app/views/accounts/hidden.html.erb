@@ -1,0 +1,27 @@
+<h1 class="page-title">Hidden Accounts</h1>
+<% if hiddenAccounts? %>
+<div class="container">
+<table class="table table-light table-striped">
+    <thead>
+        <th>Name</th>
+        <th>Balance</th>
+        <th>Account Type</th>
+        <th colspan="3">Actions...</th>
+    </thead>
+<% @accounts.each do |account| %>
+    <% if account.visible == false %>
+    <tr>
+        <td><%= account.name %></td>
+        <td>$<%= balanceFromInput(account.id) %></td>
+        <td><%= account.account_type || "none" %></td>
+        <td><a href=<%= "/accounts/activate/#{account.id}" %>><div class="btn btn-primary">Activate</div></a></td>
+    </tr>
+    <% end %>
+<%end%>
+</table>
+</div>
+<a href="/accounts/index"><div class="btn btn-primary">Back to Accounts</div></a>
+<% else %> 
+<h3>No hidden accounts</h3>
+<a href="/accounts/index"><div class="btn btn-primary">Back to Accounts</div></a>
+<% end %>
