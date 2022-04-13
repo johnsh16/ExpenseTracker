@@ -56,11 +56,12 @@ class TransactionsController < ApplicationController
     def update 
         @transaction = Transaction.find_by id: params[:id]
         @account = Account.find_by_name(transaction_params[:account_name])
+        date = Date.new(transaction_params["date_field(1i)"].to_i, transaction_params["date_field(2i)"].to_i, transaction_params["date_field(3i)"].to_i)
         groupvar = transaction_params[:group]
         if (transaction_params[:newgroup] != "") 
             groupvar = transaction_params[:newgroup]
         end
-        @transaction.update(amount: transaction_params[:amount], trans_type: transaction_params[:trans_type], description: transaction_params[:description], account_id: @account.id, group: groupvar)
+        @transaction.update(amount: transaction_params[:amount], trans_type: transaction_params[:trans_type], description: transaction_params[:description], account_id: @account.id, group: groupvar, date: date)
 
         if @transaction.save
             redirect_to "/accounts/#{@account.id}"

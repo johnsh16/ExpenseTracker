@@ -35,6 +35,8 @@ Rails.application.routes.draw do
   get '/transactions/all', to: 'transactions#all'
   post '/transactions/all', to: 'transactions#activate'
   get '/transactions/activate/:id', to: 'transactions#activate'
+
+  get '/home/data/:id', to: 'home#data'
   
   resources :users
   resources :transactions

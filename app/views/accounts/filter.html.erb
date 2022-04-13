@@ -1,0 +1,57 @@
+<%= javascript_pack_tag 'account' %>
+
+<script>
+    function toggleFilter () {
+        document.getElementById("filter-button-container").hidden = !document.getElementById("filter-button-container").hidden
+    }
+    console.log(<%= @account.id %>)
+</script>
+
+
+<h1 class="page-title">Account: <%= @account.name %></h1>
+<a href= <%= "/accounts/edit/#{@account.id}" %><div class="btn btn-secondary">Edit Details</div></a>
+<div class="btn btn-secondary" id="filter-toggle" onClick="toggleFilter()">Filter</div>
+<a href="/transactions/new/"><div class="btn btn-primary">Add a new transaction</div></a>
+<a href="/accounts/index"><div class="btn btn-primary">Back to Accounts</div></a>
+<div><br></div>
+<div id="filter-button-container" hidden>
+    <a href=<%= "/accounts/#{@account.id}/filter_byGroup"%>><div class="btn btn-light" id="group-filter">Group</div></a>
+    <a href=<%= "/accounts/#{@account.id}/filter_byDate_asc"%>><div class="btn btn-light" id="date-asc-filter">Date: Ascending</div></a>
+    <a href=<%= "/accounts/#{@account.id}/filter_byDate_desc"%>><div class="btn btn-light" id="date-desc-filter">Date: Descending</div></a>
+    <a href=<%= "/accounts/#{@account.id}" %>><div class="btn btn-danger">X</div></a>
+    <div><br></div>
+</div>
+<h2>Balance: $<%= balance %></h2>
+<% if @transactions.length != 0 %>
+    <div class="container">
+    <table class="table table-light">
+        <thead>
+            <th>Date</th>
+            <th>Description</th>
+            <th>Group</th>
+            <th>Amount</th>
+            <th>+/-</th>
+            <th colspan="2">Actions...</th>
+        </thead>
+        <% @func.each do |transaction| %>
+            <% if transaction.visible == true || transaction.visible == nil %>
+            <tr>
+                <td><%= transaction.date %></td>
+                <td><%= transaction.description %></td>
+                <td><%= transaction.group %></td>
+                <td>$<%= transaction.amount %></td>
+                <td><%= formatTransType(transaction) %></td>
+                <td><a href=<%="/transactions/edit/#{transaction.id}"%>><div class="btn btn-primary">Edit</div></a></td>
+                <td><a href=<%="/transactions/remove/#{transaction.id}"%>><div class="btn btn-primary">Remove</div></a></td> 
+            </tr>
+            <% end %>
+        <% end %>
+    </table>
+    </div>
+<% else %> 
+    <% if params[:action] %>
+            <h3>Filter returned no results</h3>
+    <% else %>
+    <h3>Account has no transactions</h3>
+    <% end %>
+<% end %>

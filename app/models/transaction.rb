@@ -4,7 +4,6 @@ class Transaction < ApplicationRecord
     validates :account_id, presence: true
     validates :date, presence: true
     validates :trans_type, inclusion: {in: ["debit", "credit"]}
-    #validates :class, inclusion: {in: CLASSIFICATIONS}
 
     self.primary_key = "id"
 

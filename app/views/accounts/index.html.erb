@@ -25,9 +25,107 @@
         </div>
         <a href="/accounts/new"><div class="btn btn-primary">Add an Account</div></a>
         <a href="/accounts/hidden"><div class="btn btn-primary">View Hidden Accounts</div></a>
+        <div class="btn btn-primary" onClick="showCanvas()">Hide Visualizer</div>
     <%else%>
         <h3>You have no active accounts</h3>
         <a href="/accounts/new"><div class="btn btn-primary">Add an Account</div></a>
         <a href="/accounts/hidden/"><div class="btn btn-primary">View Hidden Accounts</div></a>
     <% end %>
 <% end %>
+<div class="container">
+<canvas id="canvas" height="400"  width="1200" style="background-color: 'grey'">
+</div>
+<script>
+function showCanvas () {
+    const canvas = document.querySelector('#canvas')
+    if (canvas.hidden) {
+        canvas.hidden = false
+    } else {
+        canvas.hidden = true
+    }
+}
+function httpGet(theUrl) {
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.open( "GET", theUrl, false ); // false for synchronous request
+    xmlHttp.send( null );
+    return xmlHttp.responseText;
+}
+console.log()
+let inputObj = httpGet('/home/data/15')
+console.log(inputObj)
+
+function drawCircles_line(inputObject) {
+    const canvas = document.querySelector('#canvas')
+    console.log(inputObject.accounts)
+
+    if (!canvas.getContext) {
+        return;
+    }
+    const ctx = canvas.getContext('2d')
+
+    ctx.strokeStyle = 'black'
+    ctx.lineWidth = 5
+
+    const numItems = inputObject.accounts.length
+
+    //How much space do we give each dot?
+    let widthDivision = canvas.width/numItems
+    let heightDivision = canvas.height/2
+    
+    function largestBalance () {
+        let largestBalance = 0
+        for (i = 0; i<numItems; i++) {
+            if (inputObject.accounts[i].balance > largestBalance) {
+                largestBalance = inputObject.accounts[i].balance
+            }
+        }
+        console.log(largestBalance)
+        return largestBalance
+    }
+
+    let scale = (widthDivision-20)/(largestBalance())
+    let colorArray = ['green', 'red', 'purple', 'blue', 'yellow', "brown"]
+
+    function fillCircle (x,y,r, color) {
+        var gradient = ctx.createRadialGradient(x,y,r, x,y,r-3);
+        gradient.addColorStop(0, color)
+        gradient.addColorStop(0.9, 'lightgrey')
+        ctx.beginPath();
+        ctx.arc(x,y,r,0,2*Math.PI);
+        ctx.stroke();
+        ctx.fillStyle = gradient;
+        ctx.fill();
+    };
+
+    ctx.font = '15px serif'
+
+    if (inputObject.accounts[0]) {
+        fillCircle((0.5*widthDivision), heightDivision, scale*inputObject.accounts[0].balance/3, colorArray[0])
+        ctx.fillText(inputObject.accounts[0].name, (0.35*widthDivision), (heightDivision)+(scale*inputObject.accounts[0].balance/2)+20)
+    }
+    if (inputObject.accounts[1]) {
+        fillCircle((1.5*widthDivision), heightDivision, scale*inputObject.accounts[1].balance/3, colorArray[1])
+        ctx.fillText(inputObject.accounts[1].name, (1.35*widthDivision), (heightDivision)+(scale*inputObject.accounts[1].balance/2)+20)
+    }
+    if (inputObject.accounts[2]) {
+        fillCircle((2.5*widthDivision), heightDivision, scale*inputObject.accounts[2].balance/3, colorArray[2])
+        ctx.fillText(inputObject.accounts[2].name, (2.35*widthDivision), (heightDivision)+(scale*inputObject.accounts[2].balance/2)+20)
+    }
+    if (inputObject.accounts[3]) {
+        fillCircle((3.5*widthDivision), heightDivision, scale*inputObject.accounts[3].balance/3, colorArray[3])
+        ctx.fillText(inputObject.accounts[3].name, (3.35*widthDivision), (heightDivision)+(scale*inputObject.accounts[3].balance/2)+20)
+    }
+    if (inputObject.accounts[4]) {
+        fillCircle((4.5*widthDivision), heightDivision, scale*inputObject.accounts[4].balance/3, colorArray[4])
+        ctx.fillText(inputObject.accounts[4].name, (4.35*widthDivision), (heightDivision)+(scale*inputObject.accounts[4].balance/2)+20)
+    }
+    if (inputObject.accounts[5]) {
+        fillCircle((5.5*widthDivision), heightDivision, scale*inputObject.accounts[5].balance/3, colorArray[5])
+        ctx.fillText(inputObject.accounts[5].name, (5.35*widthDivision), (heightDivision)+(scale*inputObject.accounts[5].balance/2)+20)
+    }
+}
+setTimeout(() => {
+    drawCircles_line(JSON.parse(inputObj))
+}, 15)
+
+</script>

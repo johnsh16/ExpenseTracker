@@ -20,17 +20,16 @@ class AccountsController < ApplicationController
     def filter 
         @account = Account.find_by_id(params[:id])
         #@all_transactions = @account.transactions
-        @transactions = Array.new
+        @func = nil
         case params[:func]
         when "filter_byGroup"
             puts 'ding'
-            @transactions = helpers.filter_byGroup
+            @func = helpers.filter_byGroup
         when "filter_byDate_asc"
-            @transactions = helpers.filter_byDate_asc
+            @func = helpers.filter_byDate_asc
         when "filter_byDate_desc"
-            @transactions = helpers.filter_byDate_desc
+            @func = helpers.filter_byDate_desc
         end
-        render :show
     end
 
 

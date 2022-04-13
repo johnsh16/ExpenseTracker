@@ -67,7 +67,9 @@ module AccountsHelper
             end
         end
         puts 'ding'
-        puts returnArray
+        for transaction in returnArray
+            puts transaction.group
+        end
         returnArray
     end
 
@@ -103,7 +105,7 @@ module AccountsHelper
                     if ( @transactions[i].date < returnArray[j].date )
                         returnArray.push( @transactions[i] )
                     else 
-                        returnArray.insert( returnArray.length-2, @transactions[i] )
+                        returnArray.insert( returnArray.length-1, @transactions[i] )
                     end
                 elsif @transactions[i].date >= returnArray[j].date
                     returnArray.insert( j, @transactions[i] )
