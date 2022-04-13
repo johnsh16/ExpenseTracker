@@ -1,5 +1,5 @@
 class Account < ApplicationRecord
-    #validates :type, inclusion: { in: ACCOUNT_TYPES}
+    validates :name, presence: true
 
     belongs_to :user
     has_many :transactions

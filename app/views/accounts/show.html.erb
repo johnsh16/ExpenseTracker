@@ -1,5 +1,7 @@
 <h1 class="page-title">Account: <%= @account.name %></h1>
-<h4 class="page-subtitle"><a href= <%= "/accounts/edit/#{@account.id}" %>>Edit Details</a></h4>
+<a href= <%= "/accounts/edit/#{@account.id}" %><div class="btn btn-secondary">Edit Details</div></a>
+<div class="btn btn-secondary">Filter</div>
+<div><br></div>
 <% if @transactions.length != 0 %>
     <div class="container">
     <table class="table table-light">
@@ -27,7 +29,11 @@
     </table>
     </div>
 <% else %> 
+    <% if params[:action] %>
+            <h3>Filter returned no results</h3>
+    <% else %>
     <h3>Account has no transactions</h3>
+    <% end %>
 <% end %>
 <h2>Balance: $<%= balance %></h2>
 <a href="/transactions/new/"><div class="btn btn-primary">Add a new transaction</div></a>

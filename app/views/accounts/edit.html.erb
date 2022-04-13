@@ -5,18 +5,19 @@
 
 <div class="container">
 <%= form_with model: @account do |form| %>
-    <div class="mb-3 form-contents">
+    <div>
         <%= form.label :name, "Name" %>
         <%= form.text_field :name, :placeholder => @account.name %>
     </div>
 
-    <div class="mb-3 form-contents">
+    <div>
         <%= form.label :type, "Account Type" %>
         <%= form.select :account_type, ["Checking", "Savings", "Other"], selected: @account.account_type || nil %>
     </div>
 
-    <div class="mb-3 form-contents">
+    <div>
         <%= form.submit :submit %>
     </div>
 <% end %> 
 </div>
+<a href=<%= "/accounts/#{@account.id}" %>><div class="btn btn-primary">Back To Account</div></a>

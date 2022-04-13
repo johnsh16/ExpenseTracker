@@ -1,13 +1,15 @@
 class Transaction < ApplicationRecord
-    #validates :type, inclusion: {in: TRANSACTION_TYPES}
+    validates :amount, presence: true
+    validates :user_id, presence: true
+    validates :account_id, presence: true
+    validates :date, presence: true
+    validates :trans_type, inclusion: {in: ["debit", "credit"]}
     #validates :class, inclusion: {in: CLASSIFICATIONS}
 
     self.primary_key = "id"
 
     belongs_to :account
     belongs_to :user
-
-    TRANSACTION_TYPES = ["withdrawal", "deposit"]
 
     #I haven't added this to the db table yet...
     #...the idea is that the user could create categories of transactions outside of basic transaction type (above)...

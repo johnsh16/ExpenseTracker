@@ -17,6 +17,23 @@ class AccountsController < ApplicationController
         @account = Account.new
     end
 
+    def filter 
+        @account = Account.find_by_id(params[:id])
+        #@all_transactions = @account.transactions
+        @transactions = Array.new
+        case params[:func]
+        when "filter_byGroup"
+            puts 'ding'
+            @transactions = helpers.filter_byGroup
+        when "filter_byDate_asc"
+            @transactions = helpers.filter_byDate_asc
+        when "filter_byDate_desc"
+            @transactions = helpers.filter_byDate_desc
+        end
+        render :show
+    end
+
+
     def create
         self.new
         @user = User.find_by_id(session[:user_id])

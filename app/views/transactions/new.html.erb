@@ -1,10 +1,25 @@
 <h1>Transactions</h1>
 <h3>Add a transaction</h3>
 
-<%= form_with model: @transactions do |form| %>
+<%= form_with model: @transaction do |form| %>
     <div>
-        <%= form.label :date_field %>
+        <%= form.label :date_field, "*Date" %>
         <%= form.date_select :date_field %>
+    </div>
+
+    <div>
+        <%= form.label :type, "*Type" %>
+        <%= form.select :trans_type, ["credit", "debit"] %>
+    </div>
+
+    <div>
+        <%= form.label :amount, "*Amount" %>
+        <%= form.number_field :amount, in: 0.00..100000.00, step: 0.01 %>
+    </div>
+
+    <div> 
+        <%= form.label :account_name, "*Account Name" %>
+        <%= form.select :account_name, account_names %>
     </div>
 
     <div> 
@@ -12,20 +27,19 @@
         <%= form.text_field :description%>
     </div>
 
-    <div>
-        <%= form.label :type %>
-        <%= form.select :trans_type, ["credit", "debit"] %>
-    </div>
-
-    <div>
-        <%= form.label :amount %>
-        <%= form.number_field :amount, in: 0.00..100000.00, step: 0.01 %>
-    </div>
-
-    <div> 
-        <%= form.label :account_name %>
-        <%= form.select :account_name, account_names %>
-    </div>
+    <% if returnGroups != 0 %>
+        <div class="mb-3">  
+            <%= form.label :group, "Group", class: "form-label" %>
+            <%= form.select :group, returnGroups, selected: "" %>
+            <%= form.label :newgroup, "Create New Group", class: "form-label" %>
+            <%= form.text_field :newgroup %>
+        </div>
+    <% else %>
+        <div class="mb-3">  
+            <%= form.label :group, "Create New Group", class: "form-label" %>
+            <%= form.text_field :group, class: "form-control" %>
+        </div>
+    <% end %>
 
     <div>
         <%= form.submit %>

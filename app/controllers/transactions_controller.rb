@@ -26,17 +26,25 @@ class TransactionsController < ApplicationController
 
     def create 
         #@transaction = User.find_by_id(transaction_params[:account]).new(transaction_params)
-        date = Date.new(params["date_field(1i)"].to_i, params["date_field(2i)"].to_i, params["date_field(3i)"].to_i)
-        #date = Date.new date_field["date_field(1i)"].to_i, date_field["date_field(2i)"].to_i, date_field["date_field(3i)"].to_i
-        @account = Account.find_by(name: params[:account_name])
+        @transaction = nil
+        date = Date.new(transaction_params["date_field(1i)"].to_i, transaction_params["date_field(2i)"].to_i, transaction_params["date_field(3i)"].to_i)
+        groupvar = transaction_params[:group]
+        if (transaction_params[:newgroup] != "") 
+            groupvar = transaction_params[:newgroup]
+        end
+        @account = Account.find_by(name: transaction_params[:account_name])
         @user = User.find_by_id(session[:user_id])
-        @transactions = Transaction.new(amount: params[:amount], date: date, description: params[:description], trans_type: params[:trans_type], account_id: @account.id, user_id: @user.id, visible: true)
-
-        if @transactions.save
-            redirect_to "/account/#{@account.id}"
-        else 
-            puts @transactions.date
-            render :create, status: :unprocessable_entity
+        begin 
+            @transaction = Transaction.new(amount: transaction_params[:amount], date: date, description: transaction_params[:description], trans_type: transaction_params[:trans_type], account_id: @account.id, user_id: @user.id, visible: true, group: groupvar)
+            if @transaction.save
+                redirect_to "/accounts/#{@account.id}"
+            else 
+                puts @transaction.date
+                render :new, status: :unprocessable_entity
+            end
+        rescue NoMethodError => error
+            puts error
+            render :new, status: :unprocessable_entity
         end
     end
 

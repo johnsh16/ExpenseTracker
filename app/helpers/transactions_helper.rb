@@ -31,13 +31,13 @@ module TransactionsHelper
     def returnGroups
         @user = User.find_by_id(session[:user_id])
         @transactions = @user.transactions
-        groups = Array.new
+        groups = Array.new([""])
         for transaction in @transactions
             if (!groups.include?(transaction.group) && transaction.group != nil && transaction.group != "")
                 groups.push(transaction.group)
             end
         end
-        if (groups.length == 0) 
+        if (groups.length == 1) 
             return 0
         end
         groups

@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   get '/accounts/hidden', to: 'accounts#hidden'
   get '/accounts/remove/:id', to: 'accounts#remove'
   get '/accounts/activate/:id', to: 'accounts#activate'
+  get '/accounts/:id/:func', to: 'accounts#filter'
 
   post '/user/login', to: 'sessions#create'
   post '/user/signup', to: 'user#create'
@@ -26,6 +27,7 @@ Rails.application.routes.draw do
   get '/transactions/new'
   get '/transactions/create'
   post '/transactions/new', to: 'transactions#create'
+  post '/transactions/create', to: 'transactions#create'
   get '/transactions/edit'
   get '/transactions/edit/:id', to: 'transactions#edit'
   post '/transactions/edit/:id', to: 'transactions#update'
