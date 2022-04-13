@@ -27,4 +27,19 @@ module TransactionsHelper
         end
         return 0
     end
+
+    def returnGroups
+        @user = User.find_by_id(session[:user_id])
+        @transactions = @user.transactions
+        groups = Array.new
+        for transaction in @transactions
+            if (!groups.include?(transaction.group) && transaction.group != nil && transaction.group != "")
+                groups.push(transaction.group)
+            end
+        end
+        if (groups.length == 0) 
+            return 0
+        end
+        groups
+    end
 end

@@ -16,7 +16,7 @@
             <tr>
                 <td><%= transaction.date %></td>
                 <td><%= transaction.description %></td>
-                <td>Group</td>
+                <td><%= transaction.group %></td>
                 <td>$<%= transaction.amount %></td>
                 <td><%= formatTransType(transaction) %></td>
                 <td><a href=<%="/transactions/edit/#{transaction.id}"%>><div class="btn btn-primary">Edit</div></a></td>

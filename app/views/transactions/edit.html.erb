@@ -3,23 +3,37 @@
 
 <%= form_with model: @transaction do |form| %>
     <div class="mb-3">
-        <%= form.label :amount, "Amount" %>
+        <%= form.label :amount, "Amount", class:"form-label" %>
         <%= form.number_field :amount, in: 0.00..100000.00, step: 0.01, :placeholder => @transaction.amount.to_i || nil %>
     </div>
 
     <div class="mb-3">
-        <%= form.label :trans_type, "Transaction Type" %>
-        <%= form.select :trans_type, ["credit", "debit"], selected: @transaction.trans_type || nil %>
+        <%= form.label :trans_type, "Transaction Type", class: "form-label" %>
+        <%= form.select :trans_type, ["credit", "debit"], selected: @transaction.trans_type || nil, class:"form-select" %>
     </div>
 
     <div class="mb-3">
-        <%= form.label :description, "Description" %>
+        <%= form.label :description, "Description", class: "form-label" %>
         <%= form.text_field :description, :placeholder => @transaction.description || nil %>
     </div>
 
+    <% if returnGroups != 0 %>
+        <div class="mb-3">  
+            <%= form.label :group, "Group", class: "form-label" %>
+            <%= form.select :group, returnGroups, selected: @transaction.group || nil %>
+            <%= form.label :newgroup, "Create New Group", class: "form-label" %>
+            <%= form.text_field :newgroup %>
+        </div>
+    <% else %>
+        <div class="mb-3">  
+            <%= form.label :group, "Create New Group", class: "form-label" %>
+            <%= form.text_field :group, class: "form-control" %>
+        </div>
+    <% end %>
+
     <div class="mb-3">
-        <%= form.label :account, "Account" %>
-        <%= form.select :account, account_names, selected: @account.name %>
+        <%= form.label :account_name, "Account", class: "form-label" %>
+        <%= form.select :account_name, account_names, selected: @account.name %>
     </div>
 
     <div>

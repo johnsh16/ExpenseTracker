@@ -23,10 +23,11 @@
         <%end%>
         </table>
         </div>
-        <a href="/accounts/create"><div class="btn btn-primary">Add an Account</div></a>
-        <a href="/accounts/hidden"><div class="btn btn-primary">View Deleted Accounts</div></a>
+        <a href="/accounts/new"><div class="btn btn-primary">Add an Account</div></a>
+        <a href="/accounts/hidden"><div class="btn btn-primary">View Hidden Accounts</div></a>
     <%else%>
         <h3>You have no active accounts</h3>
-        <a href="/accounts/hidden/"><div class="btn btn-primary">View Deleted Accounts</div></a>
+        <a href="/accounts/new"><div class="btn btn-primary">Add an Account</div></a>
+        <a href="/accounts/hidden/"><div class="btn btn-primary">View Hidden Accounts</div></a>
     <% end %>
 <% end %>

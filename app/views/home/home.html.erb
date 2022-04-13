@@ -1,10 +1,8 @@
-<h1>Expense Tracker Home</h1>
+<h1 class="page-title">Expense Tracker Home</h1>
 <% if logged_in? && current_user  %>
     <h3>Logged in as <%= @current_email %></h3>
-    <a href="/user/logout">Logout</a>
-    <a href="/transactions/index">View Transactions</a>
-    <a href="/accounts/index">View Accounts</a>
+    <a href="/user/logout"><div class="btn btn-primary">Logout</div></a>
 <% else %>
-    <a href="/user/login/">Login</a>
-    <a href="/user/signup">Create an Account</a>
+    <a href="/user/login/"><div class="btn btn-primary">Login</div></a>
+    <a href="/user/signup"><div class="btn btn-primary">Create an Account</div></a>
 <% end %>

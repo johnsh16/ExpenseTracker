@@ -21,7 +21,8 @@ Rails.application.routes.draw do
   post '/user/signup', to: 'user#create'
   get '/user/logout', to: 'sessions#destroy'
 
-  get 'transactions/index'
+  get '/transactions/index'
+  get '/transactions/show/date::date/', to: 'transactions#show_by_date'
   get '/transactions/new'
   get '/transactions/create'
   post '/transactions/new', to: 'transactions#create'

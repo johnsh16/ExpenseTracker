@@ -10,11 +10,13 @@ class TransactionsController < ApplicationController
         end
     end
 
-    def show 
-        #puts "test"
-        #@transactions = User.find_by_id(session[:user_id]).transactions
-        #@transactions = "test"
-        #puts @transactions
+    def show_by_date
+        puts params[:date]
+        newDate = params[:date].slice(0..3) + "-" + params[:date].slice(4..5) + "-" + params[:date].slice(6..7)
+        puts newDate
+        @user = User.find_by_id(session[:user_id])
+        @transactions = @user.transactions.where(date: newDate)
+        render :show
     end
 
     def new
@@ -28,10 +30,10 @@ class TransactionsController < ApplicationController
         #date = Date.new date_field["date_field(1i)"].to_i, date_field["date_field(2i)"].to_i, date_field["date_field(3i)"].to_i
         @account = Account.find_by(name: params[:account_name])
         @user = User.find_by_id(session[:user_id])
-        @transactions = Transaction.new(amount: params[:amount], date: date, description: params[:description], trans_type: params[:trans_type], account_id: @account.id, user_id: @user.id)
+        @transactions = Transaction.new(amount: params[:amount], date: date, description: params[:description], trans_type: params[:trans_type], account_id: @account.id, user_id: @user.id, visible: true)
 
         if @transactions.save
-            redirect_to '/transactions/index'
+            redirect_to "/account/#{@account.id}"
         else 
             puts @transactions.date
             render :create, status: :unprocessable_entity
@@ -45,11 +47,15 @@ class TransactionsController < ApplicationController
 
     def update 
         @transaction = Transaction.find_by id: params[:id]
-        @account = Account.find_by_id(@transaction.account_id)
-        @transaction.update(amount: transaction_params[:amount], trans_type: transaction_params[:trans_type], description: transaction_params[:description], account: @account)
+        @account = Account.find_by_name(transaction_params[:account_name])
+        groupvar = transaction_params[:group]
+        if (transaction_params[:newgroup] != "") 
+            groupvar = transaction_params[:newgroup]
+        end
+        @transaction.update(amount: transaction_params[:amount], trans_type: transaction_params[:trans_type], description: transaction_params[:description], account_id: @account.id, group: groupvar)
 
         if @transaction.save
-            redirect_to "/accounts/#{transaction_params[:account]}"
+            redirect_to "/accounts/#{@account.id}"
         else 
             render :edit
         end
@@ -75,6 +81,6 @@ class TransactionsController < ApplicationController
     private 
 
     def transaction_params
-        params.require(:transaction).permit(:amount, :account_name, :trans_type, :date_field, :description, :user_id, :account_id)
+        params.require(:transaction).permit(:amount, :account_name, :trans_type, :date_field, :description, :user_id, :account_id, :group, :newgroup)
     end
 end
